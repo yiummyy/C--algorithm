@@ -1,1 +1,1 @@
-# C--algorithm
+# C++-algorithm
