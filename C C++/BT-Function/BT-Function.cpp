@@ -390,7 +390,14 @@ struct stack
 
 void printTreeMiddleNoRecursion(tNode* root)
 {
+	if(root == NULL)
+	{
+		printTreeNode(root);
+		return ;
+	}
 	
+	stack *s = new stack();
+	tNode* p = 
 }
 int main(int argc, char** argv) 
 {
