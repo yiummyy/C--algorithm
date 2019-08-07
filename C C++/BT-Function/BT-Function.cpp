@@ -177,6 +177,71 @@ tNode* maxNoCursion(tNode* x)//way 2
 	return p;
 }
 
+tNode* floor(tNode* x, int key)//find the first node which is less than key  (right) 
+{
+	if(x == NULL)
+	{
+		return NULL;
+	}
+	if(key == x->key)
+	{
+		return x;
+	}
+	else if(key < x->key)
+	{
+		return floor(x->pLeft, key);
+	}
+	
+	tNode* t = floor(x->pRight, key);
+	
+	if(t != NULL)
+	{
+		return t;
+	}
+	else
+	{
+		return x;//When the process comes here we have found the first value in the right part that is less than key
+	}
+}
+
+tNode* celling(tNode* x, int key)//find the first node which is greater than key
+{
+	if(x == NULL)
+	{
+		return NULL;
+	}
+	if(key == x->key)
+	{
+		return x;
+	}
+	else if(key > x->key)
+	{
+		return celling(x->pRight, key);
+	}
+	
+	tNode* t = floor(x->pLeft, key);
+	
+	if(t != NULL)
+	{
+		return t;
+	}
+	else
+	{
+		return x;//When the process comes here we have found the first value in the right part that is less than key
+	}
+}
+
+tNode* select(tNode* x,int )
+{
+	
+}
+
+tNode* rank(tNode* x, int )
+{
+	
+}
+
+
 int main(int argc, char** argv) 
 {
 	int array[] = {19,22,31,24,55,3,2,9,17,25,53};
@@ -208,5 +273,7 @@ int main(int argc, char** argv)
 	printf("\n");
 	printf("\n");
 	printTreeNode(max(root));//print max value
+	printf("\n");
+	printTreeNode(floor(root, 4));
 	return 0;
 }
