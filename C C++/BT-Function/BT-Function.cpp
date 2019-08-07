@@ -292,7 +292,7 @@ tNode* deleteMin(tNode* x)
     return x;
 }
 
-tNode* deleteNode(tNode* x, int key)
+tNode* deleteNode(tNode* x, int key)//Delete a node
 {
 	if(x == NULL)
 	{
@@ -386,7 +386,11 @@ struct stack
 		}
 		return p;
 	}
-}
+};
+
+void printTreeMiddleNoRecursion(tNode* root)
+{
+	
 }
 int main(int argc, char** argv) 
 {
