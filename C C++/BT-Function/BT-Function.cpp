@@ -1,6 +1,5 @@
 #include <iostream>
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
 struct tNode
 {
 	int key;
@@ -361,7 +360,7 @@ struct stack
 			index++;
 		}
 	}
-	tNode* pos()
+	tNode* pop()
 	{
 		if(index > 0)
 		{
@@ -397,7 +396,18 @@ void printTreeMiddleNoRecursion(tNode* root)
 	}
 	
 	stack *s = new stack();
-	tNode* p = 
+	tNode* p = root;
+	while(p != NULL || s->getLength() != 0)
+	{
+		while(p != NULL)
+		{
+			s->push(p);
+			p = p->pLeft;
+		}
+		p = s->pop();
+		printTreeNode(p);
+		p = p->pRight;
+	}
 }
 int main(int argc, char** argv) 
 {
