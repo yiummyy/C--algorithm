@@ -273,6 +273,71 @@ int rank(tNode* x, int key)//give you the key, find the correponding rank
 		return size(x->pLeft);
 	}
 }
+//when the condition "//if both left and right, we should find the minimum" in deleteNode function,
+//we should 
+tNode* deleteMin(tNode* x)
+{
+	if(x->pLeft == NULL)
+	{
+		tNode* p = x->pRight;
+		p->pParent = x;
+		//delete x;
+		return p;
+	}
+	
+    x->pLeft = deleteMin(x->pLeft);
+    
+    x->N = size(x->pLeft) + size(x->pRight) + 1;
+    
+    return x;
+}
+
+tNode* deleteNode(tNode* x, int key)
+{
+	if(x == NULL)
+	{
+		return NULL;
+	}
+	if(key < x->key)
+	{
+		x->pLeft = deleteNode(x->pLeft, key);
+	}
+	if(key > x->key)
+	{
+		x->pRight = deleteNode(x->pRight, key);
+	}
+	else
+	{
+		if(x->pRight == NULL)//no rightsubtree , lift left subtree
+		{
+			tNode* p = x->pLeft;
+			p->pParent = x->pParent;
+			delete x;
+			return p;
+		}
+		if(x->pLeft == NULL)//no leftsubtree , lift right subtree
+		{
+			tNode* p = x->pRight;
+			p->pParent = x->pParent;
+			delete x;
+			return p;
+		}
+		//if both left and right, we should find the minimum
+		tNode* t = x;
+		x = min(t->pRight); //find the min node
+		
+		//tNode* pTemp = deleteMin(t->pRight);
+		//x->pRight = pTemp;
+		x->pRight = deleteMin(t->pRight);
+		x->pLeft = t->pLeft;
+		x->pParent = t->pParent;
+		
+		delete t;
+	}
+	
+	x->N = size(x->pLeft) + size(x->pRight) + 1;
+	return x;
+}
 
 int main(int argc, char** argv) 
 {
@@ -311,5 +376,8 @@ int main(int argc, char** argv)
 	printTreeNode(select(root, 7));
 	printf("\n");
 	printf("%d\n", rank(root, 17));
+	printf("\n");
+	tNode* p = deleteNode(root, 19);
+	printTreeMiddle(p);
 	return 0;
 }
