@@ -231,16 +231,48 @@ tNode* celling(tNode* x, int key)//find the first node which is greater than key
 	}
 }
 
-tNode* select(tNode* x,int )
+tNode* select(tNode* x,int k)//give you the rank k , find the corresponding key
 {
 	
-}
-
-tNode* rank(tNode* x, int )
-{
+	if(x == NULL)
+	{
+		return NULL;
+	}
+	int t = size(x->pLeft); 
 	
+	if(t > k)
+	{
+		return select(x->pLeft, k);
+	}
+	else if(t < k)
+	{
+		return select(x->pRight, k - t - 1);
+	}
+	else
+	{
+		return x;
+	}
 }
 
+int rank(tNode* x, int key)//give you the key, find the correponding rank
+{
+	if(x == NULL)
+	{
+		return 0;
+	}
+	if(key < x->key)
+	{
+		return rank(x->pLeft, key);
+	}
+	else if(key > x->key)
+	{
+		return (1 + size(x->pLeft)+ rank(x->pRight, key));//it's possible plused many times "1 + size(x->pLeft)" by recursion
+	}
+	else
+	{
+		return size(x->pLeft);
+	}
+}
 
 int main(int argc, char** argv) 
 {
@@ -275,5 +307,9 @@ int main(int argc, char** argv)
 	printTreeNode(max(root));//print max value
 	printf("\n");
 	printTreeNode(floor(root, 4));
+	printf("\n");
+	printTreeNode(select(root, 7));
+	printf("\n");
+	printf("%d\n", rank(root, 17));
 	return 0;
 }
