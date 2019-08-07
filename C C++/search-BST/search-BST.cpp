@@ -17,17 +17,30 @@ struct tNode
 		pLeft = pL;
 		pRight = pR;
 		pParent = pP;
+		value = v;
 		N = 1;
 	}
 	
-	tNode(int k, tNode*pR, int v)
+	tNode(int k, tNode*pP, int v)
 	{
-		new (this)tNode(k, NULL, NULL, pR, v);
+		new (this)tNode(k, NULL, NULL, pP, v);
 	}
 };
 
+int size(tNode* x)
+{
+	if(x == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		return x->N;
+	}
+}
 tNode* put(tNode* x, int key, int value)//found a binary tree
 {
+	
 	if(x == NULL)
 	{
 		return new tNode(key, NULL, value);
@@ -53,7 +66,7 @@ tNode* put(tNode* x, int key, int value)//found a binary tree
 		x->value = value;
 	}
 	
-	x->N = sizeof(x->pLeft) + sizeof(x->pRight) +1;
+	x->N = size(x->pLeft) + size(x->pRight) +1;
 	return x;
 }
 
@@ -77,11 +90,22 @@ tNode* get(tNode* x, int key)
 	}
 }
 
-void printTreeNode(tNode* root)
+void printTreeNode(tNode* root)//!!!some problems in the print "NULL"
 {
+	tNode* pP = NULL;
+	
 	if(root != NULL)
 	{
-		printf("(key=%d,N=%d)", root->key, root->N);
+		pP = root->pParent;
+		
+		if(pP != NULL)
+		{
+			printf("(key=%d, pkey=%d, N=%d)", root->key, pP->key, root->N);
+		}
+		else
+		{
+			printf("(key=%d, pkey=NULL, N=%d)", root->key, root->N);
+		}
 	}
 	else
 	{
@@ -98,12 +122,14 @@ void printTreeMiddle(tNode* root)
 		printTreeMiddle(root->pRight);
 	}
 }
+
 int main(int argc, char** argv) 
 {
 	int array[] = {19,22,31,24,55,3,2,9,17,25,53};
 	int len = sizeof(array)/sizeof(array[0]);
 	
 	tNode* root = NULL;
+	
 	for(int i = 0; i < len; i++)
 	{
 		root = put(root, array[i], array[i]);
