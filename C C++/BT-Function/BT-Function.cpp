@@ -36,6 +36,7 @@ int size(tNode* x)
 		return x->N;
 	}
 }
+
 tNode* put(tNode* x, int key, int value)//found a binary tree
 {
 	
@@ -87,7 +88,6 @@ tNode* get(tNode* x, int key)
 		return x;
 	}
 }
-
 
 void printTreeNode(tNode* root)//!!!some problems in the print "NULL"
 {
@@ -338,55 +338,6 @@ tNode* deleteNode(tNode* x, int key)//Delete a node
 	return x;
 }
 
-struct stack
-{
-	tNode **array;
-	int index;
-	
-	stack()
-	{
-		array = new tNode*[100];
-		index = 0;//index pointing to next position which you are going to wright
-	}
-	~stack()
-	{
-		delete[] array;
-	}
-	void push(tNode* node)
-	{
-		if(index < 100)
-		{
-			*(array + index) = node;
-			index++;
-		}
-	}
-	tNode* pop()
-	{
-		if(index > 0)
-		{
-			index--;
-			return *(array+index);
-		}
-		else
-		{
-			return NULL;
-		}
-	}
-	int getLength()
-	{
-		return index;
-	}
-	tNode* get(int i)
-	{
-		tNode* p = NULL;
-		if(i > 0 && i < index)//0~index-1
-		{
-			p = *(array + i);
-		}
-		return p;
-	}
-};
-
 void printTreeMiddleNoRecursion(tNode* root)
 {
 	if(root == NULL)
@@ -409,6 +360,7 @@ void printTreeMiddleNoRecursion(tNode* root)
 		p = p->pRight;
 	}
 }
+
 int main(int argc, char** argv) 
 {
 	int array[] = {19,22,31,24,55,3,2,9,17,25,53};
@@ -416,7 +368,7 @@ int main(int argc, char** argv)
 	
 	tNode* root = NULL;
 	
-	for(int i = 0; i < len; i++)
+	for(int i = 0; i < len; i++)//middle order set up a binry tree.
 	{
 		root = put(root, array[i], array[i]);
 	}
