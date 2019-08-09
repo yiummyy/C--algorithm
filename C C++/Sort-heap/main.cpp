@@ -1,7 +1,5 @@
 #include <iostream>
-#include <stdio.h>
-int array[] = {0,19,22,31,24,55,3,2,9,17,25,53};
-int len = sizeof(array)/sizeof(array[0])-1;
+//run wrong
 
 void printArray(int iLine, int* pArray, int len)
 {
@@ -67,7 +65,10 @@ void sink(int* array, int k, int N)//begin counting from 1, so N is index or num
 
 int main(int arge, char** argv)
 {
-	printArray(0, array, len);
+	int array[] = {0,19,22,31,24,55,3,2,9,17,25,53};
+	int len = sizeof(array)/sizeof(array[0]) - 1;
+	
+	printArray(0, array, len);//
 	
 	for(int k = len/2; k>=1 ;k--)//found the whole heap 
 	{
@@ -82,5 +83,6 @@ int main(int arge, char** argv)
 		N--;
 		sink(array, 1, N);
 	}
+	printArray(999, array, len);
 	return 0;
 }
