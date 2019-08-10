@@ -1,7 +1,4 @@
 #include <iostream>
-
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
 #define LINE 3
 #define STEPS 4
 #define MOVECOST 3
@@ -47,24 +44,24 @@ int main(int argc, char** argv)
 	
 	for(int j = 0; j < STEPS; j++)//each step
 	{
-		for(int i = 0; i< LINE;i++)//three lines
+		for(int i = 0; i< LINE;i++)//each line
 		{
-			for(int k = 0; k< LINE;k++)//
+			for(int k = 0; k< LINE;k++)//in each line there are possiblitis that you may change your road to another line 
 			{
-				if(j == 0)
+				if(j == 0)//if at the beginning, so b-a.
 				{
 					CostForIJ[k] = A[k][j];
 				}
-				else
+				else//if at c or d oy out
 				{
 					CostForIJ[k] = A[k][j] + Cost[k][j-1];
 				}
-				CostForIJ[k] += calMoveCost(i,k);// j cost
+				CostForIJ[k] += calMoveCost(i,k);//change road cost
 			}
 			
-			int minValue = CostForIJ[0];
-			int minIndex = 0;
-			
+			int minValue = CostForIJ[0];//set the initial value  (here is the first row)
+			int minIndex = 0;//set the initial index(change road)  (here is the first line)
+			//find the minimum that is also the smallest cost
 			for(int k = 0; k< LINE; k++)
 			{
 				if(CostForIJ[k] < minValue)
@@ -73,8 +70,8 @@ int main(int argc, char** argv)
 					minIndex = k;
 				}
 			}
-			Cost[i][j] = minValue;
-			Route[i][j] = minIndex;
+			Cost[i][j] = minValue;//From the beginning 
+			Route[i][j] = minIndex;//From the beginning ,shows the 
 		}
 	}
 	
@@ -83,7 +80,7 @@ int main(int argc, char** argv)
 	
 	printf("Route:\n");
 	printMatrix(Route);
-	//find the sm
+	//find the minimum cost(which is the answer)
 	int minValue = Cost[0][STEPS-1];
 	int minIndex = 0;
 	for(int k = 0; k < LINE; k++)
@@ -95,7 +92,7 @@ int main(int argc, char** argv)
 		}
 	}
 	printf("\nmin Cost: %d\n", minValue);
-	
+	//draw the road
 	int r[STEPS];
 	for(int k = STEPS-1; k >= 0; k--)
 	{
