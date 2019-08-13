@@ -21,7 +21,7 @@ int getI1(int i, int j, int Rj)//
 {
 	return getL1(i, j, Rj) - 1;
 }
-int getJ1(int i, int j, int Rj)
+int getJ1(int i, int j, int Rj)//lie 
 {
 	return j;
 }
