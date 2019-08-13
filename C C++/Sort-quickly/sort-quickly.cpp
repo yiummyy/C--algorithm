@@ -1,6 +1,5 @@
 #include <iostream>
 #include <malloc.h>
-/* run this progr,am using the console pauser or add your own getch, system("pause") or input loop */
 //int array[] = {19,22,31,24,55,3,2,9,17,25,53};
 
 void printArray(int iLine, int* pArray, int len)
@@ -40,7 +39,7 @@ void exchange(int* array ,int i ,int j)
 	}
 }
 
-int partition(int* array ,int lo , int hi)
+int partition(int* array ,int lo , int hi)//put small value farward,  put the big backward
 {
 	int i = lo;
 	int j = hi + 1;
