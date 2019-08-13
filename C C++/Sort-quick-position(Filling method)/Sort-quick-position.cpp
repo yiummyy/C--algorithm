@@ -51,22 +51,21 @@ void sort(int* array, int lo, int hi)
 	
 	int i =  lo;
 	int j =  hi;
-	
 	int pivot = *(array + lo);
 	
     while(1)
     {
-    	while(pivot < *(array + j) && i < j)
+    	while(pivot < *(array + j) && i < j)//step 1,find the value less than pivot, fill the gap.
     	{
     		j--;
 		}
 		*(array + i) = *(array + j);
 		
-		while(*(array + i) < pivot && i < j)
+		while(*(array + i) < pivot && i < j)//step 2,find the value larger than pivot, fill the gap.After this step which forms a new gap.
     	{
     		i++;
 		}
-		*(array + j) = *(array + i);
+		*(array + j) = *(array + i);//After this step which forms a new gap.Two numbers with the same value of *(array + i) are in the array.
 		
 		if(i >= j)
 		{
