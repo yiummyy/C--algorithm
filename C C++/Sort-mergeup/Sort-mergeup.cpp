@@ -26,19 +26,19 @@ void mergeArray(int* array, int lo, int mid, int hi)
 	{
 		return;
 	}
-	 
+	
 	int* ptmp = (int*)malloc((hi - lo +1) * sizeof(int));
 	
 	memcpy(ptmp, array + lo, (hi - lo +1) * sizeof(int));
 	
 	//i and j are ptmp's subscript ,the differ between ptmp's & array's subscript is lo
 	int i = 0;
-	int j = mid - lo + 1; 
+	int j = mid + 1 - lo; 
 	
-	//Actually k is the subscript between lo and hi
+	//Actually k is the subscript between lo and hi in the array 
 	for(int k = lo ; k <= hi; k++)
 	{
-		if(i + lo > mid)//The first child serie has finished(zi xu lie)
+		if(i + lo > mid)//The first child serie has fully used(zi xu lie)
 		{
 			*(array + k) = *(ptmp + j);
 			j++;
